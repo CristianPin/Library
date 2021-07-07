@@ -7,9 +7,18 @@ public class UsuarioVO {
     
     private int ID_User;
     private String Name;
+    private String Pass;
     private String Mail;
     private String UserType;
 
+    public String getPass() {
+        return Pass;
+    }
+
+    public void setPass(String Pass) {
+        this.Pass = Pass;
+    }
+    
     public int getID_User() {
         return ID_User;
     }
