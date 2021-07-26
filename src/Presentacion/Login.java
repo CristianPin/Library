@@ -95,7 +95,9 @@ public class Login extends javax.swing.JInternalFrame {
   
         if(new DelegadoUsuarios().Login(this)){
             if(new DelegadoUsuarios().UserType(this)){
-                JOptionPane.showMessageDialog(this, "Administrador");
+                AdminInterface Admin = new AdminInterface(Container);
+                Admin.setVisible(true);
+                this.setVisible(false);
             }else{
                 JOptionPane.showMessageDialog(this, "Usuario");
             }

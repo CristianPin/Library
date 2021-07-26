@@ -4,7 +4,6 @@ import Acceso.UsuarioDAO;
 import Acceso.UsuarioVO;
 import Presentacion.Login;
 import Presentacion.SignIn;
-import javax.swing.JOptionPane;
 
 public class DelegadoUsuarios {
 
