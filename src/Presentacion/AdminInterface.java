@@ -6,12 +6,11 @@ import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
 
-
-
 public class AdminInterface extends javax.swing.JInternalFrame {
 
     Container Container;
-    
+    int Opcion;
+
     public AdminInterface(Container Escritorio) {
         initComponents();
         this.Container = Escritorio;
@@ -87,6 +86,11 @@ public class AdminInterface extends javax.swing.JInternalFrame {
         });
 
         btNuevo.setText("Nuevo");
+        btNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNuevoActionPerformed(evt);
+            }
+        });
 
         btAceptar.setText("Aceptar");
         btAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -193,6 +197,7 @@ public class AdminInterface extends javax.swing.JInternalFrame {
         btNuevo.setVisible(false);
         btAceptar.setVisible(true);
         btCancel.setVisible(true);
+        Opcion = 1;
     }//GEN-LAST:event_btModActionPerformed
 
     private void btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelActionPerformed
@@ -200,6 +205,7 @@ public class AdminInterface extends javax.swing.JInternalFrame {
         txtPriceBook.setEnabled(false);
         txtAvailableBook.setEnabled(false);
         txtReserveBook.setEnabled(false);
+        cbLibros.setVisible(true);
         cbLibros.setEnabled(true);
         btMod.setVisible(true);
         btNuevo.setVisible(true);
@@ -208,10 +214,39 @@ public class AdminInterface extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btCancelActionPerformed
 
     private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptarActionPerformed
-        if(new DelegadoLibro().ModificarLibro(this)){
-            JOptionPane.showMessageDialog(this, "Cambio realizado");
+        if (Opcion == 1) {
+            if (new DelegadoLibro().ModificarLibro(this)) {
+                JOptionPane.showMessageDialog(this, "Cambio realizado");
+            }
+        } else {
+            if (Opcion == 2) {
+                if(!txtPriceBook.getText().equals("")&&!txtAvailableBook.getText().equals("")&&!txtReserveBook.getText().equals("")&&!txtNameBook.getText().equals("")){
+                    new DelegadoLibro().NuevoLibro(this);
+                    JOptionPane.showMessageDialog(this, "Libro Agregado");
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
+                }
+            }
         }
     }//GEN-LAST:event_btAceptarActionPerformed
+
+    private void btNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNuevoActionPerformed
+        txtNameBook.setEnabled(true);
+        txtNameBook.setText("");
+        txtPriceBook.setEnabled(true);
+        txtPriceBook.setText("");
+        txtAvailableBook.setEnabled(true);
+        txtAvailableBook.setText("");
+        txtReserveBook.setEnabled(true);
+        txtReserveBook.setText("");
+        cbLibros.setVisible(false);
+        btMod.setVisible(false);
+        btNuevo.setVisible(false);
+        btAceptar.setVisible(true);
+        btCancel.setVisible(true);
+        Opcion = 2;
+    }//GEN-LAST:event_btNuevoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

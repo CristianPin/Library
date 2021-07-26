@@ -34,12 +34,21 @@ public class DelegadoLibro {
         Libros.setPrice(Integer.parseInt(AI.txtPriceBook.getText()));
         Libros.setCantidad(Integer.parseInt(AI.txtAvailableBook.getText()));
         Libros.setCant_Rev(Integer.parseInt(AI.txtReserveBook.getText()));
-        if (new LibroDAO().ModificarLibro(Libros.getID_Book(), Libros.getNombre(), Libros.getPrice(), Libros.getCantidad(), Libros.getCant_Rev()) == 1) {
+        if (new LibroDAO().ModificarLibro(Libros) == 1) {
             return true;
-        }else{
+        } else {
             return false;
         }
 
+    }
+    
+    public void NuevoLibro(AdminInterface AI){
+        LibroVO Libro = new LibroVO();
+        Libro.setNombre(AI.txtNameBook.getText());
+        Libro.setPrice(Integer.parseInt(AI.txtPriceBook.getText()));
+        Libro.setCantidad(Integer.parseInt(AI.txtAvailableBook.getText()));
+        Libro.setCant_Rev(Integer.parseInt(AI.txtReserveBook.getText()));
+        new LibroDAO().CrearLibro(Libro);
     }
 
 }

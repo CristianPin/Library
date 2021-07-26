@@ -36,23 +36,42 @@ public class LibroDAO {
         }
     }
     
-    public int ModificarLibro(int ID_Book, String Nombre, int Price, int Cantidad, int Reserv){
+    public int ModificarLibro(LibroVO LVO){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection Conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/LIBRERIA", "root", "Cazador1");
             PreparedStatement Sentencia = Conexion.prepareStatement("UPDATE Book SET Nombre=?, Price=?,Cant=?, Cant_Rev=?  WHERE  ID_Book = ?");
-            Sentencia.setString(1, Nombre);
-            Sentencia.setInt(2, Price);
-            Sentencia.setInt(3, Cantidad);
-            Sentencia.setInt(4,Reserv);
-            Sentencia.setInt(5,ID_Book);
+            Sentencia.setString(1, LVO.getNombre());
+            Sentencia.setInt(2, LVO.getPrice());
+            Sentencia.setInt(3, LVO.getCantidad());
+            Sentencia.setInt(4,LVO.getCant_Rev());
+            Sentencia.setInt(5, LVO.getID_Book());
             int datos = Sentencia.executeUpdate();
+            Sentencia.close();
             return datos;
             
         } catch (Exception ex) {
             System.out.println(""+ex);
             return 0;
         }
+    }
+    
+    public void CrearLibro(LibroVO LVO){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection Conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/LIBRERIA", "root", "Cazador1");
+            PreparedStatement Sentencia = Conexion.prepareStatement("INSERT INTO Book (Nombre, Cant,Cant_Rev, Price) VALUES (?,?,?,?)");
+            Sentencia.setString(1, LVO.getNombre());
+            Sentencia.setInt(2, LVO.getCantidad());
+            Sentencia.setInt(3, LVO.getCant_Rev());
+            Sentencia.setInt(4, LVO.getPrice());
+            Sentencia.executeUpdate();
+            Sentencia.close();
+            
+        } catch (Exception ex) {
+            System.out.println(""+ex);
+        }
+        
     }
     
 }
